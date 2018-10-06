@@ -1,0 +1,11 @@
+{
+    "name": "map2chart",
+    "version": "1.0.0",
+    "description": "Implores you to use proper rhythm game nomenclature",
+    "main": "bot.js",
+    "author": "Dani",
+    "dependencies": {
+        "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+        "winston": "^3.1.0"
+    }
+}
