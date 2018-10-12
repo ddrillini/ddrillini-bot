@@ -20,8 +20,9 @@ var time_lastmatch = null;
 function produce_message(bad_word, good_word) {
     var responses = [
         `Hello. You seemed to have used the term "${bad_word}" when you should\'ve really used the term "${good_word}". Please start using "${good_word}" in the future. Thank you.`,
-        `Hi. We do not condone this kind of language in this server. Please, refrain from using the term "${bad_word}" and instead say "${good_word}". Thank you.`
-    ];
+        `Hi. We do not condone this kind of language in this server. Please, refrain from using the term "${bad_word}" and instead say "${good_word}". Thank you.`,
+        `I\'d just like to interject for a moment. What you\'re referring to as "${bad_word}", are in fact, "${good_word}", or as I\'ve recently taken to calling them, stepcharts.`
+        ];
     var rnum = Math.floor(Math.random() * responses.length);
     return responses[rnum % responses.length];
 }
