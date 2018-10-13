@@ -17,11 +17,16 @@ var bot = new Discord.Client({
 moment.relativeTimeThreshold('ss', 1);
 var time_lastmatch = null;
 // Generate insults
-function produce_message(bad_word, good_word) {
+function produce_message(bad_word_raw, good_word_raw) {
+    var bad_word = `**${bad_word_raw}**`;
+    var good_word = `**${good_word_raw}**`;
     var responses = [
-        `Hello. You seemed to have used the term "${bad_word}" when you should\'ve really used the term "${good_word}". Please start using "${good_word}" in the future. Thank you.`,
-        `Hi. We do not condone this kind of language in this server. Please, refrain from using the term "${bad_word}" and instead say "${good_word}". Thank you.`,
-        `I\'d just like to interject for a moment. What you\'re referring to as "${bad_word}", are in fact, "${good_word}", or as I\'ve recently taken to calling them, stepcharts.`
+        `Hello. You seemed to have used the term ${bad_word} when you should\'ve really used the term ${good_word}. Please start using ${good_word} in the future. Thank you.`,
+        `Hi. We do not condone this kind of language in this server. Please, refrain from using the term ${bad_word} and instead say ${good_word}. Thank you.`,
+        `I\'d just like to interject for a moment. What you\'re referring to as ${bad_word}, is in fact, ${good_word}.`,
+        `Please avoid the term ${bad_word}. People around here seem to favor the term ${good_word}. I don\'t want anybody to get upset.`,
+        `A kitten dies every time someone writes ${bad_word}. Make the world a better place, write ${good_word} instead.`,
+        `The term ${good_word} is unquestionably superior to the term ${bad_word}. Seriously. Please use the appropriate word.`
         ];
     var rnum = Math.floor(Math.random() * responses.length);
     return responses[rnum % responses.length];
