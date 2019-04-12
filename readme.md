@@ -14,7 +14,7 @@ node bot.js
 #Python 3.7
 ```
 # install dependencies
-python3 -m pip install -U discord.py arrow
+python3 -m pip install -U discord.py arrow Pillow
 
 # run bot
 python3 bot.py --login_token <YOUR_TOKEN>

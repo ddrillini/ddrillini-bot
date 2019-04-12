@@ -3,9 +3,18 @@ import random
 import re
 import argparse
 import arrow
+from PIL import Image
+import io
+import os
 
 client = discord.Client()
 time_lastmatch = None;
+
+def get_file_name(count):
+    if count % 2:
+        return "R.png"
+    else:
+        return "B.png"
 
 def bold(word):
     return f"**{word}**"
@@ -34,23 +43,52 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    patterns = [
-    [r"(\bmap\b|\bmaps\b|\bmapping\b)", 'map', 'chart'],
-    [r"(\bbeatmap\b|\bbeatmaps\b)", 'beatmap', 'stepchart'],
-    ]
-    output_messages = []
+    if message.content.startswith("!pattern "):
+        pattern = re.findall(r"(?<=^!pattern )[LRUD]*", message.content, re.I)[0]
+        pattern = pattern[:25] #limit of 25 notes
+        img = Image.new('RGB', (32*4, len(pattern)*32), color="black")
 
-    for pattern in patterns:
-        if re.findall(pattern[0], message.content, re.I):
-            output_messages.append(produce_message(pattern[1], pattern[2]))
+        count = 0
+        for c in pattern:
+            file_name = get_file_name(count)
+            if(c.lower() == "l"): #LDUR
+                paste_me = Image.open(file_name).rotate(270)
+                x = 0
+            elif(c.lower() == "r"):
+                paste_me = Image.open(file_name).rotate(90)
+                x = 32*3
+            elif(c.lower() == "u"):
+                paste_me = Image.open(file_name).rotate(180)
+                x = 32*2
+            elif(c.lower() == "d"):
+                paste_me = Image.open(file_name)
+                x = 32
+            img.paste(paste_me, (x,count*32))
+            count += 1
+        byte_array = io.BytesIO()
+        img.save("pattern.png", format='PNG')
+        await message.channel.send(file=discord.File("pattern.png"))
 
-    if len(output_messages) > 0:
-        global time_lastmatch
-        if time_lastmatch != None:
-            output_messages.append(f"\nThe last incident happened {time_lastmatch.humanize(granularity='second')}")
-        time_lastmatch = arrow.utcnow()
-        separator = '\n'
-        await message.channel.send(separator.join(output_messages))
+
+
+    else:
+        patterns = [
+        [r"(\bmap\b|\bmaps\b|\bmapping\b)", 'map', 'chart'],
+        [r"(\bbeatmap\b|\bbeatmaps\b)", 'beatmap', 'stepchart'],
+        ]
+        output_messages = []
+
+        for pattern in patterns:
+            if re.findall(pattern[0], message.content, re.I):
+                output_messages.append(produce_message(pattern[1], pattern[2]))
+
+        if len(output_messages) > 0:
+            global time_lastmatch
+            if time_lastmatch != None:
+                output_messages.append(f"\nThe last incident happened {time_lastmatch.humanize(granularity='second')}")
+            time_lastmatch = arrow.utcnow()
+            separator = '\n'
+            await message.channel.send(separator.join(output_messages))
     
 
 
