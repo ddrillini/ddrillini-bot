@@ -42,7 +42,7 @@ async def on_message(message):
 
     if message.content.startswith("!pattern "):
         # TODO see if you can escape things?
-        pattern = re.findall(r"(?<=^!pattern )[LRUD]*", message.content, re.I)[0]
+        pattern = re.findall(r"(?<=^!pattern )[LRUD()]*", message.content, re.I)[0]
         pattern = pattern[:25] #limit of 25 notes
         img = Image.new('RGB', (32*4, len(pattern)*32), color="black")
 
@@ -51,6 +51,8 @@ async def on_message(message):
         arrows = [red_arrow, blue_arrow]
 
         mine_file_name = "Mine.png"
+        
+        jump = 0
 
         count = 0
         for c in pattern:
@@ -79,8 +81,13 @@ async def on_message(message):
             elif(c == "D"):
                 paste_me = Image.open(mine_file_name)
                 x = 32
+            elif(c == "("):
+                jump = 1
+            elif(c == ")"):
+                jump = 0
             img.paste(paste_me, (x,count*32))
-            count += 1
+            if(jump == 0): #skip count increment if jumping
+                count += 1
         byte_array = io.BytesIO()
         img.save("pattern.png", format='PNG')
         await message.channel.send(file=discord.File("pattern.png"))
