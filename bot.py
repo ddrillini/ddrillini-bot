@@ -51,6 +51,8 @@ async def on_message(message):
         pattern = pattern[:25] #limit of 25 notes
         img = Image.new('RGB', (32*4, len(pattern)*32), color="black")
 
+        mine_file_name = "Mine.png"
+
         count = 0
         for c in pattern:
             file_name = get_file_name(count)
@@ -67,16 +69,16 @@ async def on_message(message):
                 paste_me = Image.open(file_name)
                 x = 32
             elif(c == "l"): #mines
-                paste_me = Image.open(Mine.png).rotate(270)
+                paste_me = Image.open(mine_file_name).rotate(270)
                 x = 0
             elif(c == "r"):
-                paste_me = Image.open(Mine.png).rotate(90)
+                paste_me = Image.open(mine_file_name).rotate(90)
                 x = 32*3
             elif(c == "u"):
-                paste_me = Image.open(Mine.png).rotate(180)
+                paste_me = Image.open(mine_file_name).rotate(180)
                 x = 32*2
             elif(c == "d"):
-                paste_me = Image.open(Mine.png)
+                paste_me = Image.open(mine_file_name)
                 x = 32
             img.paste(paste_me, (x,count*32))
             count += 1
