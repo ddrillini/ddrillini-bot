@@ -86,14 +86,14 @@ async def on_message(message):
             elif(c == "("):
                 jump = 1
                 blank = 1
-                crop += 32
             elif(c == ")"):
                 jump = 0
                 blank = 1
-                crop += 32
             if(blank == 0):
                 img.paste(paste_me, (x,count*32))
             blank = 0
+            if(jump == 1):
+                crop += 32
             if(jump == 0): #skip count increment if jumping
                 count += 1
             img.crop((0,0,32,len(pattern)*32-crop))
