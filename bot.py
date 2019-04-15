@@ -52,6 +52,8 @@ async def on_message(message):
 
         mine_file_name = "Mine.png"
         
+        blank_file_name = "Blank.png"
+        
         jump = 0
 
         count = 0
@@ -83,8 +85,10 @@ async def on_message(message):
                 x = 32
             elif(c == "("):
                 jump = 1
+                paste_me = Image.open(blank_file_name)
             elif(c == ")"):
                 jump = 0
+                paste_me = Image.open(blank_file_name)
             img.paste(paste_me, (x,count*32))
             if(jump == 0): #skip count increment if jumping
                 count += 1
