@@ -42,7 +42,7 @@ async def on_message(message):
 
     if message.content.startswith("!pattern "):
         # TODO see if you can escape things?
-        pattern = re.findall(r"(?<=^!pattern )[LRUD()]*", message.content, re.I)[0]
+        pattern = re.findall(r"(?<=^!pattern )[LRUD() ]*", message.content, re.I)[0]
         cropflag = 0
         crop = 0
         patternlength = 0
@@ -102,6 +102,8 @@ async def on_message(message):
                 blank = 1
             elif(c == ")"):
                 jump = 0
+                blank = 1
+            elif(c == " "):
                 blank = 1
             if(blank == 0):
                 img.paste(paste_me, (x,count*32))
