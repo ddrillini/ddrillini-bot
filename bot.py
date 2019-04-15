@@ -96,7 +96,7 @@ async def on_message(message):
                 crop += 32
             if(jump == 0): #skip count increment if jumping
                 count += 1
-            img.crop((0,0,32,len(pattern)*32-crop))
+        img.crop((0,0,32,len(pattern)*32-crop))
         byte_array = io.BytesIO()
         img.save("pattern.png", format='PNG')
         await message.channel.send(file=discord.File("pattern.png"))
