@@ -4,8 +4,10 @@ import re
 import argparse
 import arrow
 from PIL import Image
-import io
-import os
+import io, os
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
 time_lastmatch = None;
@@ -61,7 +63,7 @@ async def on_message(message):
             elif(c == "U"):
                 paste_me = Image.open(file_name).rotate(180)
                 x = 32*2
-            elif(c) == "D"):
+            elif(c == "D"):
                 paste_me = Image.open(file_name)
                 x = 32
             elif(c == "l"): #mines
