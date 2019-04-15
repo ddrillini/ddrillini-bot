@@ -25,6 +25,12 @@ def produce_message(bad_word, good_word):
         f"I\'d just like to interject for a moment. What you\'re referring to as {bold_bad_word}, is in fact, {bold_good_word}.",
         f"Please avoid the term {bold_bad_word}. People around here seem to favor the term {bold_good_word}. I don\'t want anybody to get upset.",
         f"A kitten dies every time someone writes {bold_bad_word}. Make the world a better place, write {bold_good_word} instead.",
+        f"What\'s that? Did I just hear someone say {bold_bad_word}? I better not have heard someone say {bold_bad_word}. That better be {bold_good_word} before I get around the corner or so help me...",
+        f"Type {bold_bad_word} again and I will physically manifest in your house and make you type {bold_good_word} until you forget the word {bold_bad_word} exists.",
+        f"You\'re gonna want to replace that {bold_bad_word} with {bold_good_word}, trust me. I\'m fairly merciful about this but Ian takes no prisoners.",
+        f"I see you are of the cult of {bold_bad_word}. Here at DDRIllini, we exclusively follow the cult of {bold_good_word}, and we ask that you please do the same.",
+        f"Ya ever just accidentally type {bold_bad_word} instead of {bold_good_word}? You must have\; it\'s not like you could have intentionally typed {bold_bad_word}, cuz if so we\'d have to [REDACTED], and trust me nobody wants that.",
+        f"It seems your rampant keysmashing accidentally generated the word {bold_bad_word}. In the future, please quality check your nonsense and replace any instances of {bold_bad_word} with {bold_good_word}.",
         f"The term {bold_good_word} is unquestionably superior to the term {bold_bad_word}. Seriously. Please use the appropriate word."
     ]
     return random.choice(responses)
