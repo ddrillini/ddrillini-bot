@@ -51,10 +51,9 @@ async def on_message(message):
         arrows = [red_arrow, blue_arrow]
 
         mine_file_name = "Mine.png"
-        
-        blank_file_name = "Blank.png"
-        
+               
         jump = 0
+        blank = 0
 
         count = 0
         for c in pattern:
@@ -85,11 +84,13 @@ async def on_message(message):
                 x = 32
             elif(c == "("):
                 jump = 1
-                paste_me = Image.open(blank_file_name)
+                blank = 1
             elif(c == ")"):
                 jump = 0
-                paste_me = Image.open(blank_file_name)
-            img.paste(paste_me, (x,count*32))
+                blank = 1
+            if(blank == 0):
+                img.paste(paste_me, (x,count*32))
+            blank = 0
             if(jump == 0): #skip count increment if jumping
                 count += 1
         byte_array = io.BytesIO()
