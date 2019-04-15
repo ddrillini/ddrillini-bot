@@ -1,3 +1,4 @@
+# note: requrise python 3.6
 import discord
 import random
 import re
@@ -11,12 +12,6 @@ logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
 time_lastmatch = None;
-
-def get_file_name(count):
-    if count % 2:
-        return "B.png"
-    else:
-        return "R.png"
 
 def bold(word):
     return f"**{word}**"
@@ -51,33 +46,37 @@ async def on_message(message):
         pattern = pattern[:25] #limit of 25 notes
         img = Image.new('RGB', (32*4, len(pattern)*32), color="black")
 
+        red_arrow = Image.open("R.png")
+        blue_arrow = Image.open("B.png")
+        arrows = [red_arrow, blue_arrow]
+
         mine_file_name = "Mine.png"
 
         count = 0
         for c in pattern:
-            file_name = get_file_name(count)
-            if(c == "L"): #LDUR
-                paste_me = Image.open(file_name).rotate(270)
-                x = 0
-            elif(c == "R"):
-                paste_me = Image.open(file_name).rotate(90)
-                x = 32*3
-            elif(c == "U"):
-                paste_me = Image.open(file_name).rotate(180)
-                x = 32*2
-            elif(c == "D"):
-                paste_me = Image.open(file_name)
-                x = 32
-            elif(c == "l"): #mines
-                paste_me = Image.open(mine_file_name).rotate(270)
+            file_name = arrows[count % 2] # grab red or blue arrow
+            if(c == "l"): #LDUR
+                paste_me = file_name.rotate(270)
                 x = 0
             elif(c == "r"):
-                paste_me = Image.open(mine_file_name).rotate(90)
+                paste_me = file_name.rotate(90)
                 x = 32*3
             elif(c == "u"):
-                paste_me = Image.open(mine_file_name).rotate(180)
+                paste_me = file_name.rotate(180)
                 x = 32*2
             elif(c == "d"):
+                paste_me = file_name
+                x = 32
+            elif(c == "L"): #mines
+                paste_me = Image.open(mine_file_name).rotate(270)
+                x = 0
+            elif(c == "R"):
+                paste_me = Image.open(mine_file_name).rotate(90)
+                x = 32*3
+            elif(c == "U"):
+                paste_me = Image.open(mine_file_name).rotate(180)
+                x = 32*2
+            elif(c == "D"):
                 paste_me = Image.open(mine_file_name)
                 x = 32
             img.paste(paste_me, (x,count*32))
