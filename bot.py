@@ -84,7 +84,8 @@ async def on_message(message):
 
 
 
-    else:
+    elif (message.guild.name == "DDRIllini"):
+
         patterns = [
         [r"(\bmap\b|\bmaps\b|\bmapping\b)", 'map', 'chart'],
         [r"(\bbeatmap\b|\bbeatmaps\b)", 'beatmap', 'stepchart'],
