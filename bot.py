@@ -12,9 +12,9 @@ time_lastmatch = None;
 
 def get_file_name(count):
     if count % 2:
-        return "R.png"
-    else:
         return "B.png"
+    else:
+        return "R.png"
 
 def bold(word):
     return f"**{word}**"
@@ -44,11 +44,12 @@ async def on_message(message):
         return
 
     if message.content.startswith("!pattern "):
+        # TODO see if you can escape things?
         pattern = re.findall(r"(?<=^!pattern )[LRUD]*", message.content, re.I)[0]
         pattern = pattern[:25] #limit of 25 notes
         img = Image.new('RGB', (32*4, len(pattern)*32), color="black")
 
-        count = 1
+        count = 0
         for c in pattern:
             file_name = get_file_name(count)
             if(c.lower() == "l"): #LDUR
