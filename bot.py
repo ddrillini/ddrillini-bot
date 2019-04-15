@@ -48,7 +48,7 @@ async def on_message(message):
         pattern = pattern[:25] #limit of 25 notes
         img = Image.new('RGB', (32*4, len(pattern)*32), color="black")
 
-        count = 0
+        count = 1
         for c in pattern:
             file_name = get_file_name(count)
             if(c.lower() == "l"): #LDUR
