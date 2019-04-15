@@ -43,16 +43,22 @@ async def on_message(message):
     if message.content.startswith("!pattern "):
         # TODO see if you can escape things?
         pattern = re.findall(r"(?<=^!pattern )[LRUD()]*", message.content, re.I)[0]
-        pattern = pattern[:25] #limit of 25 notes
         cropflag = 0
         crop = 0
+        patternlength = 0
+        characterlength = 0
         for c in pattern:
-            if(c == "("):
-                cropflag = 1 #mark jumps
-            elif(c == ")"):
-                cropflag = 0 #end of jump
-            if(cropflag == 1):
-                crop += 1
+            if(patternlength <= 25):
+                if(c == "("):
+                    cropflag = 1 #mark jumps
+                elif(c == ")"):
+                    cropflag = 0 #end of jump
+                if(cropflag == 1):
+                    crop += 1
+                else:
+                    patternlength += 1
+                characterlength += 1
+        pattern = pattern[:characterlength] #limit of 25 lines
         img = Image.new('RGB', (32*4, (len(pattern)-crop)*32), color="black")
 
         red_arrow = Image.open("R.png")
