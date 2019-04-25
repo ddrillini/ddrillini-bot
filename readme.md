@@ -1,8 +1,13 @@
-We're currently in the midst of the semester, but we'll publish this bot eventually.
-
 Currently, it has two features:
-[placeholder1 - map]
-[placeholder2 - pattern ref]
+![map joke](readme-images/map-joke.png)
+![pattern](readme-images/pattern.png)
+
+You can download this and run it yourself. Be wary it's pretty
+hacky.
+
+We're currently in the midst of the semester, but we might publish this bot
+eventually so that anyone can just add it to their own server. Watch this
+repo to be notified (we'd make a release).
 
 # Node.js
 ```
