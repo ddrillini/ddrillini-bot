@@ -1,4 +1,10 @@
-#Node.js
+We're currently in the midst of the semester, but we'll publish this bot eventually.
+
+Currently, it has two features:
+[placeholder1 - map]
+[placeholder2 - pattern ref]
+
+# Node.js
 ```
 # install nodejs
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
@@ -11,7 +17,7 @@ npm install discord.io winston moment
 # you could use a proper process manager but /shrug
 node bot.js
 ```
-#Python 3.7
+# Python 3.7
 ```
 # install dependencies
 python3 -m pip install -U discord.py arrow Pillow
