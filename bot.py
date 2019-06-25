@@ -137,7 +137,7 @@ async def on_message(message):
         if len(output_messages) > 0:
             global time_lastmatch
             if time_lastmatch != None:
-                output_messages.append(f"\nThe last incident happened {time_lastmatch.humanize(granularity='second')}.")
+                output_messages.append(f"\nThe last incident happened {time_lastmatch.humanize()}.")
             time_lastmatch = arrow.utcnow()
             separator = '\n'
             await message.channel.send(separator.join(output_messages))
