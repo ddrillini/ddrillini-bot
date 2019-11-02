@@ -1,4 +1,4 @@
-# note: requrise python 3.6
+# note: requires python 3.6
 import discord
 import random
 import re
@@ -129,6 +129,9 @@ async def on_message(message):
         [r"(\bbeatmap\b|\bbeatmaps\b)", 'beatmap', 'stepchart'],
         ]
         output_messages = []
+
+        if re.findall(r"(?<!gnu[- /])(?<!gnu plus )\blinux\b", message.content.re.I):
+            output_messages.append('I\'d just like to interject for a moment. What you\'re referring to as Linux, is in fact, GNU/Linux, or as I\'ve recently taken to calling it, GNU plus Linux.')
 
         for pattern in patterns:
             if re.findall(pattern[0], message.content, re.I):
